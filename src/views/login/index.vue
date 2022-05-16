@@ -7,8 +7,8 @@ import { userLogin } from '@/api/login'
 const ruleFormRef = ref<FormInstance>()
 
 const form = reactive <loginForm>({
-  username: '',
-  password: '',
+  username: 'yandiwu97@163.com',
+  password: '12123',
 })
 
 const validatePass = (rule: any, value: any, callback: any) => {
@@ -39,6 +39,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl?.validate((valid) => {
     if (valid) {
+      // 在store里面处理登录逻辑
       userLogin(form).then(res => {
         console.log('res', res)
       })

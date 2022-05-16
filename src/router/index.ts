@@ -1,5 +1,7 @@
 import { createWebHashHistory, createRouter } from 'vue-router'
 
+const whiteList = ['/login', '/test'] // no redirect whitelist
+
 const routes = [
   {
     path: '/',
@@ -15,4 +17,25 @@ const routes = [
 export const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const hastoken = localStorage.getItem('token')
+  if (hastoken) {
+    if (to.path === '/login') {
+      console.log('login page ')
+    } else {
+      // 这里做权限配置
+    }
+  } else {
+    // 没有token
+    let isWhiteRouter = whiteList.find(item => item === to.path)
+    console.log(isWhiteRouter)
+    if (isWhiteRouter) {
+      next()
+    } else {
+      next(`/login?redirect=${to.path}`)
+    }
+  }
+  next()
 })
