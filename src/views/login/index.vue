@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { loginForm } from '../../types/login'
+import { loginForm } from '@/types/login'
+import { userLogin } from '@/api/login'
 
 const ruleFormRef = ref<FormInstance>()
 
-const form = reactive<loginForm>({
-  account: '',
+const form = reactive <loginForm>({
+  username: '',
   password: '',
 })
 
@@ -23,7 +24,7 @@ const validatePass = (rule: any, value: any, callback: any) => {
 }
 
 const rules = reactive<FormRules>({
-  account: [{ 
+  username: [{ 
     type: 'email',
     message: 'Please input correct email address',
     trigger: ['blur', 'change'],
@@ -38,6 +39,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl?.validate((valid) => {
     if (valid) {
+      userLogin(form).then(res => {
+        console.log('res', res)
+      })
       console.log('submit!')
     } else {
       return false
@@ -51,8 +55,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
     <el-form class="the-form" :rules="rules" label-position="left" label-width="80px" ref="ruleFormRef" :model="form"
       style="width: 350px" :status-icon="true"	>
       <h3 class="login-title">登 录</h3>
-      <el-form-item label="账号:" prop="account">
-        <el-input v-model="form.account" />
+      <el-form-item label="账号:" prop="username">
+        <el-input v-model="form.username" />
       </el-form-item>
       <el-form-item label="密码:" prop="password">
         <el-input v-model="form.password" type="password" />

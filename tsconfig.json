@@ -10,11 +10,31 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "allowJs": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "skipLibCheck": true,
-    "types": ["element-plus/global"]
+    "types": [
+      "element-plus/global"
+    ],
 
+    // 解决ts-node报错
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

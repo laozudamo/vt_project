@@ -1,6 +1,4 @@
-import type { FormInstance, FormRules } from 'element-plus'
-
 export interface loginForm {
-  account: string,
+  username: string,
   password: string
 }
