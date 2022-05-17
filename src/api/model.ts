@@ -1,5 +1,6 @@
-export interface loginModel {
-  token: string
+export interface loginResModel {
+  token: string;
+  role?: 'admin'
 }
 
 export interface GetInfoModel {

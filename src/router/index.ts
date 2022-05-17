@@ -30,7 +30,6 @@ router.beforeEach((to, from, next) => {
   } else {
     // 没有token
     let isWhiteRouter = whiteList.find(item => item === to.path)
-    console.log(isWhiteRouter)
     if (isWhiteRouter) {
       next()
     } else {

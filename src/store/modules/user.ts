@@ -20,15 +20,17 @@ export const useUserStore = defineStore({
       this.token = token
       window.localStorage.setItem('token', token)
     },
-    
-    async login(params: loginForm) {
+
+
+    async login(params: loginForm): Promise<loginModel> {
       try {
-        const data: loginModel = await userLogin(params)
+        const data = await userLogin(params)
         const { token } = data
         this.setToken(token)
       } catch (error) {
         return Promise.reject(error);
       }
+      return
     }
   }
 })
