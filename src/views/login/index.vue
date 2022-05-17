@@ -2,12 +2,12 @@
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { loginForm } from '@/types/login'
-import { userLogin } from '@/api/login'
+import { userLogin } from '@/api/user'
 
 const ruleFormRef = ref<FormInstance>()
 
 const form = reactive <loginForm>({
-  username: 'yandiwu97@163.com',
+  username: 'laozudaomo@gmail.com',
   password: '12123',
 })
 

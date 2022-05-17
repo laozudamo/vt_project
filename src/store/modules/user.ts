@@ -1,27 +1,34 @@
 import { defineStore } from 'pinia';
-import { getUserInfo } from '@/api/user';
-import { UserInfo } from '@/types/store'
+import { userLogin } from '@/api/user';
+import { loginForm } from '@/types/login'
+import { GetInfoModel, loginModel } from '@/api/model'
 
 export const useUserStore = defineStore({
   id: 'app-user',
   state: () => ({
-    // user info
     userInfo: null,
     // token
-    token: undefined,
+    token: '',
     // roleList
     roleList: [],
-    // Whether the login expired
-    sessionTimeout: false,
-    // Last fetch time
-    lastUpdateTime: 0,
   }),
   getters: {
 
   },
   actions: {
-    async getUserInfo() {
-      // getUserInfo()
+    setToken(token: string) {
+      this.token = token
+      window.localStorage.setItem('token', token)
+    },
+    
+    async login(params: loginForm) {
+      try {
+        const data: loginModel = await userLogin(params)
+        const { token } = data
+        this.setToken(token)
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
   }
 })
